@@ -111,6 +111,6 @@ native int GetLanguageByCode(const char[] code);
  * Pobiera numer języka z nazwy języka.
  *
  * @param name	 		       	Nazwa języka (rozróżnia wielkości liter).
- * @return		    	   	    	Numer języka. -1 jeśli nie znaleziono.
+ * @return		    	   	   	Numer języka. -1 jeśli nie znaleziono.
  */
 native int GetLanguageByName(const char[] name);
