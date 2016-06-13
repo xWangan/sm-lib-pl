@@ -35,13 +35,13 @@
 #endif
 #define _lang_included
 
-#define LANG_SERVER		0		/**< Translate using the server's language */
+#define LANG_SERVER		0		/**< Wykorzystuj translacje zgodne z językiem serwera */
 
 /**
- * Loads a translation file for the plugin calling this native.
- * If no extension is specified, .txt is assumed.
+ * Ładuje translacje dla pluginu wykorzystującego ten natyw.
+ * Jeśli nie podano rozszerzenia, domyślnie zakłada się rozszerzenie .txt
  *
- * @param file		Translation file.
+ * @param file		         Plik z translacjami.
  */
 native void LoadTranslations(const char[] file);
 
@@ -51,66 +51,66 @@ native void LoadTranslations(const char[] file);
  * indexes can be specified but the error will occur during translation,
  * not during this function call.
  *
- * @param client	Client index or LANG_SERVER.
+ * @param client				     ID klienta lub LANG_SERVER.
  */
 native void SetGlobalTransTarget(int client);
 
 /**
- * Retrieves the language number of a client.
+ * Zwraca numer języka wykorzystywanego przez klienta.
  *
- * @param client	Client index.
- * @return			Language number client is using.
- * @error			Invalid client index or client not connected.
+ * @param client				      ID klienta.
+ * @return				          		Numer języka wykorzystywanego przez klienta.
+ * @error						           Nieprawidłowe ID klienta, klient nie jest w grze.
  */
 native int GetClientLanguage(int client);
 
 /**
- * Retrieves the server's language.
+ * Zwraca język wykorzystywany przez serwer.
  *
- * @return			Language number server is using.
+ * @return					            Numer języka wykorzystywanego przez serwer.
  */
 native int GetServerLanguage();
 
 /**
- * Returns the number of languages known in languages.cfg.
+ * Zwraca liczbę znanych języków w languages.cfg.
  *
- * @return			Language count.
+ * @return						           Liczba języków.
  */
 native int GetLanguageCount();
 
 /**
- * Retrieves info about a given language number.
+ * Pobiera informacje o numerze języka.
  *
- * @param language	Language number.
- * @param code		Language code buffer (2-3 characters usually).
- * @param codeLen	Maximum length of the language code buffer.
- * @param name		Language name buffer.
- * @param nameLen	Maximum length of the language name buffer.
- * @error			Invalid language number.
+ * @param language			      Numer języka.
+ * @param code				         Bufor kodu języka (zazwyczaj 2-3 znaki).
+ * @param codeLen			       Maksymalna długość buforu kodu języka.
+ * @param name				         Bufor nazwy języka.
+ * @param nameLen			       Maksymalna długość buforu nazwy języka.
+ * @error					             Nieprawidłowy numer języka.
  */
 native void GetLanguageInfo(int language, char[] code="", int codeLen=0, char[] name="", int nameLen=0);
 
 /**
- * Sets the language number of a client.
+ * Ustawia numer języka klientowi.
  *
- * @param client	Client index.
- * @param language	Language number.
- * @error			Invalid client index or client not connected.
+ * @param client   	    		 ID klienta.
+ * @param language	     		 Numer języka.
+ * @error		               	Nieprawidłowe ID klienta, klient nie jest w grze.
  */
 native void SetClientLanguage(int client, int language);
 
 /**
- * Retrieves the language number from a language code.
+ * Pobiera numer języka z kodu języka.
  *
- * @param code		Language code (2-3 characters usually).
- * @return			Language number. -1 if not found.
+ * @param code		      	    Kod języka (zazwyczaj 2-3 znaki).
+ * @return			 		           Numer języka. -1 jeśli nie znaleziono.
  */
 native int GetLanguageByCode(const char[] code);
 
 /**
- * Retrieves the language number from a language name.
+ * Pobiera numer języka z nazwy języka.
  *
- * @param name		Language name (case insensitive).
- * @return			Language number. -1 if not found.
+ * @param name	 		       	Nazwa języka (rozróżnia wielkości liter).
+ * @return		    	   	    	Numer języka. -1 jeśli nie znaleziono.
  */
 native int GetLanguageByName(const char[] name);
