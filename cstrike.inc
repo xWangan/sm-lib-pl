@@ -9,7 +9,7 @@
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License, version 3.0, as published by the
  * Free Software Foundation.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
@@ -35,43 +35,43 @@
 #endif
 #define _cstrike_included
 
-#define CS_TEAM_NONE		0	/**< No team yet. */
-#define CS_TEAM_SPECTATOR	1	/**< Spectators. */
-#define CS_TEAM_T 			2	/**< Terrorists. */
-#define CS_TEAM_CT			3	/**< Counter-Terrorists. */
+#define CS_TEAM_NONE		0	/**< Brak drużyny */
+#define CS_TEAM_SPECTATOR	1	/**< Obserwator */
+#define CS_TEAM_T 			2	/**< Terrorysta */
+#define CS_TEAM_CT			3	/**< CT */
 
-#define CS_SLOT_PRIMARY		0	/**< Primary weapon slot. */
-#define CS_SLOT_SECONDARY	1	/**< Secondary weapon slot. */
-#define CS_SLOT_KNIFE		2	/**< Knife slot. */
-#define CS_SLOT_GRENADE		3	/**< Grenade slot (will only return one grenade). */
-#define CS_SLOT_C4			4	/**< C4 slot. */
+#define CS_SLOT_PRIMARY		0	/**< Slot na główną broń */
+#define CS_SLOT_SECONDARY	1	/**< Slot na zapasową broń */
+#define CS_SLOT_KNIFE		2	/**< Slot na nóż */
+#define CS_SLOT_GRENADE		3	/**< Slot na granat (Zwraca tylko 1 granat). */
+#define CS_SLOT_C4			4	/**< Slot na c4 */
 
 #define CS_DMG_HEADSHOT		(1 << 30)	/**< Headshot */
 
 enum CSRoundEndReason
 {
-	CSRoundEnd_TargetBombed = 0,           /**< Target Successfully Bombed! */
-	CSRoundEnd_VIPEscaped,                 /**< The VIP has escaped! - Doesn't exist on CS:GO */
-	CSRoundEnd_VIPKilled,                  /**< VIP has been assassinated! - Doesn't exist on CS:GO */
-	CSRoundEnd_TerroristsEscaped,          /**< The terrorists have escaped! */
-	CSRoundEnd_CTStoppedEscape,            /**< The CTs have prevented most of the terrorists from escaping! */
-	CSRoundEnd_TerroristsStopped,          /**< Escaping terrorists have all been neutralized! */
-	CSRoundEnd_BombDefused,                /**< The bomb has been defused! */
-	CSRoundEnd_CTWin,                      /**< Counter-Terrorists Win! */
-	CSRoundEnd_TerroristWin,               /**< Terrorists Win! */
-	CSRoundEnd_Draw,                       /**< Round Draw! */
-	CSRoundEnd_HostagesRescued,            /**< All Hostages have been rescued! */
-	CSRoundEnd_TargetSaved,                /**< Target has been saved! */
-	CSRoundEnd_HostagesNotRescued,         /**< Hostages have not been rescued! */
-	CSRoundEnd_TerroristsNotEscaped,       /**< Terrorists have not escaped! */
-	CSRoundEnd_VIPNotEscaped,              /**< VIP has not escaped! - Doesn't exist on CS:GO */
-	CSRoundEnd_GameStart,                  /**< Game Commencing! */
-	
-	// The below only exist on CS:GO
-	CSRoundEnd_TerroristsSurrender,        /**< Terrorists Surrender */
-	CSRoundEnd_CTSurrender,                /**< CTs Surrender */
-	CSRoundEnd_TerroristsPlanted,		   /**< Terrorists Planted the bomb */
-	CSRoundEnd_CTsReachedHostage,		   /**< CTs Reached the hostage */
+	CSRoundEnd_TargetBombed = 0,           /**< Udane zniszczenie celu! */
+	CSRoundEnd_VIPEscaped,                 /**< VIP został uratowany! - Nie istnieje w CS:GO */
+	CSRoundEnd_VIPKilled,                  /**< VIP został zamordowany! - Nie istnieje w CS:GO */
+	CSRoundEnd_TerroristsEscaped,          /**< Terroriści uciekli! */
+	CSRoundEnd_CTStoppedEscape,            /**< CT powstrzymało terrorystów przed ucieczką! */
+	CSRoundEnd_TerroristsStopped,          /**< Wszyscy uciekająct terroryści zostali zneutralizowani! */
+	CSRoundEnd_BombDefused,                /**< Bomba została rozbrojona! */
+	CSRoundEnd_CTWin,                      /**< CT wygrało! */
+	CSRoundEnd_TerroristWin,               /**< Terroryści wygrali! */
+	CSRoundEnd_Draw,                       /**< Remis! */
+	CSRoundEnd_HostagesRescued,            /**< Wszystkie hosty zostały uratowane! */
+	CSRoundEnd_TargetSaved,                /**< Cel został zabezpieczony */
+	CSRoundEnd_HostagesNotRescued,         /**< Hosty nie zostały uratowane! */
+	CSRoundEnd_TerroristsNotEscaped,       /**< Terroryści nie zdołali uciec */
+	CSRoundEnd_VIPNotEscaped,              /**< VIP nie zdołał uciec! - Nie istnieje w CS:GO */
+	CSRoundEnd_GameStart,                  /**< Rozgrywka nadchodzi! */
+
+
+	CSRoundEnd_TerroristsSurrender,        /**< Terroriści poddali się */
+	CSRoundEnd_CTSurrender,                /**< CT poddało się */
+	CSRoundEnd_TerroristsPlanted,		   /**< Terroryści podłożyli bombę */
+	CSRoundEnd_CTsReachedHostage,		   /**< CT zdobyło hosty */
 };
 
 enum CSWeaponID
@@ -134,246 +134,240 @@ enum CSWeaponID
 };
 
 /**
- * Called when a player attempts to purchase an item.
- * Return Plugin_Continue to allow the purchase or return a
- * higher action to deny.
+ * Wywoływane kiedy gracz usiłuje kupić przedmiot.
+ * Zwrócenie Plugin_Continue pozwala, każda inna wyższa akcja blokuje.
  *
- * @param client	Client index
- * @param weapon	User input for weapon name
+ * @param client	ID klienta.
+ * @param weapon	Wprowadzona przez użytkownika nazwa broni.
  */
 forward Action CS_OnBuyCommand(int client, const char[] weapon);
 
 /**
- * Called when CSWeaponDrop is called
- * Return Plugin_Continue to allow the call or return a
- * higher action to block.
+ * Wywoływane kiedy CSWeaponDrop jest wywoływane.
+ * Zwrócenie Plugin_Continue pozwala, każda inna wyższa akcja blokuje.
  *
- * @param client	Client index
- * @param weaponIndex	Weapon index
+ * @param client	ID klienta.
+ * @param weaponIndex	ID broni.
  */
 forward Action CS_OnCSWeaponDrop(int client, int weaponIndex);
 
 /**
- * Called when game retrieves a weapon's price for a player.
- * Return Plugin_Continue to use default value or return a higher
- * action to use a newly-set price.
- * 
- * @note This can be called multiple times per weapon purchase
- * 
- * @param client	Client index
- * @param weapon	Weapon classname
- * @param price		Buffer param for the price of the weapon
+ * Wywoływane kiedy gra uzyskuje cene broni dla gracza.
+ * Zwrócenie Plugin_Continue powoduje użycie standardowych wartości, każda inna wyższa akcja powoduje użycie nowo ustawionej ceny.
  *
- * @note			Not all "weapons" call GetWeaponPrice. Example: c4, knife, vest, vest helmet, night vision.
+ * @note Może być wywoływane wielokrotnie podczas kupowania broni.
+ *
+ * @param client	ID klienta.
+ * @param weapon	Classname broni.
+ * @param price		Buffor dla ceny broni.
+ *
+ * @note			Nie wszystkie "bronie" wywołują GetWeaponPrice, np. c4, knife, vest, vest helmet, night vision.
  */
 forward Action CS_OnGetWeaponPrice(int client, const char[] weapon, int &price);
 
 /**
- * Called when TerminateRound is called.
- * Return Plugin_Continue to ignore, return Plugin_Changed to continue,
- * using the given delay and reason, or return Plugin_Handled or a higher
- * action to block TerminateRound from firing.
+ * Wywoływany kiedy TerminateRound jest wywoływane.
+ * Zwrócenie Plugin_Continue spowoduje zignorowanie, zwrócenie Plugin_Changed spowoduje kontynuowanie (wykorzystywany do zmianny opóżnienia i powodu), zwrócenie Plugin_Handled blokuje TerminateRound przed wywołaniem
  *
- * @param delay		Time (in seconds) until new round starts
- * @param reason	Reason for round end
+ * @param delay		Czas (w sekundach) przed rozpoczęciem nowej rundy.
+ * @param reason	Powdód zakończenia rundy.
  */
 forward Action CS_OnTerminateRound(float &delay, CSRoundEndReason &reason);
 
 /**
- * Respawns a player.
+ * Ożywia gracza.
  *
- * @param client		Player's index.
- * @error			Invalid client index, client not in game.
+ * @param client		ID klienta.
+ * @error			Nieprawidłowe ID klienta, klient nie jest w grze.
  */
 native void CS_RespawnPlayer(int client);
 
 /**
- * Switches the player's team.
+ * Zmiennia drużynę gracza
  *
- * @param client		Player's index.
- * @param team			Team index.
- * @error			Invalid client index, client not in game.
+ * @param client		ID klienta.
+ * @param team			ID drużyny.
+ * @error			Nieprawidłowe ID klienta, klient nie jest w grze.
  */
 native void CS_SwitchTeam(int client, int team);
 
 /**
- * Forces a player to drop or toss their weapon
+ * Zmusza gracza do porzucenia broni
  *
- * @param client		Player's index.
- * @param weaponIndex	Index of weapon to drop.
- * @param toss			True to toss weapon (with velocity) or false to just drop weapon
- * @param blockhook		Set to true to stop the corresponding CS_OnCSWeaponDrop
- * 
- * @error				Invalid client index, client not in game, or invalid weapon index.
+ * @param client		ID klienta.
+ * @param weaponIndex	ID broni do wyrzucenia.
+ * @param toss			True aby wyrzucić broń (wraz z prędkością), false aby tylko wyrzucić.
+ * @param blockhook	  Ustawienie true spowoduje blokowanie wywoływania CS_OnCSWeaponDrop.
+ *
+ * @error				Nieprawidłowe ID klienta, klient nie jest w grze, nieprawidłowe ID broni.
  */
 native void CS_DropWeapon(int client, int weaponIndex, bool toss, bool blockhook = false);
 
 /**
- * Forces round to end with a reason
+ * Wymusza koniec rundy wraz z powodem.
  *
- * @param delay			Time (in seconds) to delay before new round starts
- * @param reason		Reason for the round ending
- * @param blockhook		Set to true to stop the corresponding CS_OnTerminateRound
- *						forward from being called.
+ * @param delay			Czas (w sekundach) przed rozpoczęciem nowej rundy.
+ * @param reason		Powdód zakończenia rundy.
+ * @param blockhook		Ustawienie true spowoduje blokowanie wywoływania CS_OnTerminateRound.
  */
 native void CS_TerminateRound(float delay, CSRoundEndReason reason, bool blockhook = false);
- 
+
 /**
- * Gets a weapon name from a weapon alias
+ * Pobiera nazwe broni z aliansu broni.
  *
- * @param alias			Weapons alias to get weapon name for.
- * @param weapon		Buffer to store weapons name
- * @param size			Size of buffer to store the weapons name.
+ * @param alias			Alians broni.
+ * @param weapon		Buffor do przechowania nazwy broni.
+ * @param size			Rozmiar bufforu.
  *
- * @note				Will set the buffer to the original alias if it is not an alias to a weapon.
+ * @note				Ustawi w bufforze alians jeśli nie będzie mógł pobrać nazwy z aliansu.
  */
 native void CS_GetTranslatedWeaponAlias(const char[] alias, char[] weapon, int size);
- 
+
 /**
- * Gets a weapon's price
+ * Pobiera cenę broni.
  *
- * @param client		Client to check weapon price for.
- * @param id			Weapon id for the weapon to check
- * @param defaultprice	Set to true to get defaultprice.
- * @return				Returns price of the weapon (even if modified)
+ * @param client		ID klienta dla którgego pobieramy cene.
+ * @param id			CSWeaponID broni której cene chcemy pobrać
+ * @param defaultprice	Ustawienie true spowoduje że zostanie pobrana standardowa cena.
+ * @return				Zwraca cenę broni (nawet jeśli była modyfikowana)
  *
- * @error				Invalid client, failing to get weapon info, or failing to get price offset.
- * @note				c4, knife and shield will always return 0. vest, vest helmet and night vision will always return default price.
+ * @error				Nieprawidłowe ID klienta, błąd przy uzyskiwaniu informacji o broni, błąd przy uzyskiwaniu offsetu ceny.
+ * @note				c4, knife i shield zawsze będą zwracać 0, vest, vest helmet i night vision zawsze będą zwracać standardową cenę.
  */
 native int CS_GetWeaponPrice(int client, CSWeaponID id, bool defaultprice = false);
- 
+
 /**
- * Gets a clients clan tag
- * @param client		Client index to get clan tag for.
- * @param buffer		Buffer to store clients clan tag in.
- * @param size			Size of the buffer.
- * @return				Number of non-null bytes written.
+ * Pobiera clan tag klienta
+ * @param client		ID klienta.
+ * @param buffer		Buffor do przechowania clan tagu.
+ * @param size			Rozmiar buffora.
+ * @return				Liczbe zapisanych (nie nullowych) byte'ów.
  *
- * @error				Invalid client.
+ * @error				Nieprawidłowe ID klienta.
  */
 native int CS_GetClientClanTag(int client, char[] buffer, int size);
 
 /**
- * Sets a clients clan tag
- * @param client		Client index to set clan tag for.
- * @param tag			Tag to set clients clan tag as.
+ * Ustawia clan tag klientowi
+ * @param client		ID klienta.
+ * @param tag			Tag do ustawienia.
  *
- * @error				Invalid client.
+ * @error				Nieprawidłowe ID klienta.
  */
 native void CS_SetClientClanTag(int client, const char[] tag);
 
 /**
- * Gets a team's score
- * @param team			Team index to get score for.
- * @return				Returns the internal team score.
+ * Pobiera ilość punktów drużyny.
+ * @param team			ID drużyny.
+ * @return				Zwraca wewnętrzną ilość punktów drużyny.
  *
- * @error				Invalid team index.
+ * @error				Nieprawidłowe ID drużyny.
  */
 native int CS_GetTeamScore(int team);
 
 /**
- * Sets a team's score
- * @param team			Team index to set score for.
- * @param value			Value to set teams score as.
+ * Ustawia ilość punktów drużyny
+ * @param team			ID drużyny.
+ * @param value			Wartość do ustawienia.
  *
- * @error				Invalid team index.
- * @note				This will update the scoreboard only after the scoreboard update function is called. Use SetTeamScore plus this to update the scoreboard instantly and save values correctly.
+ * @error				Nieprawidłowe ID drużyny.
+ * @note				Scoreboard (tabela) zostaje zaktualizowana po wywołaniu funkcji od aktualizacji scoreboard.
  */
 native void CS_SetTeamScore(int team, int value);
 
 /**
- * Gets a client's mvp count
- * @param client		Client index to get mvp count of.
- * @return				Returns the client's internal MVP count.
+ * Pobiera ilość MVP klienta.
+ * @param client		ID klienta.
+ * @return				Zwraca wewnętrzną ilość MVP klienta.
  *
- * @error				Invalid client.
+ * @error				Nieprawidłowe ID klienta.
  */
 native int CS_GetMVPCount(int client);
 
 /**
- * Sets a client's mvp count
- * @param client		Client index to set mvp count for.
- * @param value			Value to set client's mvp count as.
+ * Ustawia ilość MVP klienta.
+ * @param client		ID klienta.
+ * @param value			Wartość do ustawienia.
  *
- * @error				Invalid client.
+ * @error				Nieprawidłowe ID klienta.
  */
 native void CS_SetMVPCount(int client, int value);
 
 /**
- * Gets a client's contribution score (CS:GO only)
- * @param client		Client index to get score of.
- * @return				Returns the client's score.
+ * Pobiera ilość punktów udziału(?) klienta (tylko CS:GO).
+ * @param client		ID klienta.
+ * @return				Zwraca ilość punktów klienta.
  *
- * @error				Invalid client.
+ * @error				Nieprawidłowe ID klienta.
  */
 native int CS_GetClientContributionScore(int client);
 
 /**
- * Sets a client's contribution score (CS:GO only)
- * @param client		Client index to set score for.
- * @param value			Value to set client's score as.
+ * Ustawia ilość punktów udziału(?) klienta (tylko CS:GO).
+ * @param client		ID klienta.
+ * @param value			Wartość do ustawienia.
  *
- * @error				Invalid client.
+ * @error				Nieprawidłowe ID klienta.
  */
 native void CS_SetClientContributionScore(int client, int value);
 
 /**
- * Gets a client's assists (CS:GO only)
- * @param client		Client index to get assists of.
- * @return				Returns the client's assists.
+ * Pobiera ilość asyst klienta (tylko CS:GO).
+ * @param client		ID klienta.
+ * @return				Zwraca ilość asyst klienta.
  *
- * @error				Invalid client.
+ * @error				Nieprawidłowe ID klienta.
  */
 native int CS_GetClientAssists(int client);
 
 /**
- * Sets a client's assists (CS:GO only)
- * @param client		Client index to set assists for.
- * @param value			Value to set client's assists as.
+ * Ustawia ilość asyst klienta (tylko CS:GO)
+ * @param client		ID klienta.
+ * @param value			Wartość do ustawienia.
  *
- * @error				Invalid client.
+ * @error				Nieprawidłowe ID klienta.
  */
 native void CS_SetClientAssists(int client, int value);
 
 /**
- * Gets a weaponID from a alias
- * @param alias			Weapon alias to attempt to get an id for.
- * @return				Returns a weapon id or 0 if failed to find a match.
+ * Pobiera CSWeaponID z aliansu.
+ * @param alias			Alians broni.
+ * @return				Zwraca CSWeaponID broni lub CSWeapon_NONE jeśli nie mogło znależć broni pasującej do danego aliansu.
  *
- * @note For best results use CS_GetTranslatedWeaponAlias on the weapon name before passing it.
+ * @note Dla najlepszego rezultatu użyj CS_GetTranslatedWeaponAlias, zanim przekażesz alians do tej funkcji.
  */
 native CSWeaponID CS_AliasToWeaponID(const char[] alias);
 
 /**
- * Gets a alias from a weaponID
- * @param weaponID		WeaponID to get alias for.
- * @param destination	Destination string to hold the weapon alias.
- * @param len			Length of the destination array.
- * @return				Returns number of cells written.
+ * Pobiera alians z CSWeaponID broni.
+ * @param weaponID		CSWeaponID broni.
+ * @param destination	Buffor do przechowania aliansu broni.
+ * @param len			Rozmiar bufforu.
+ * @return				Zwraca ilość zapisanych komórek.
  */
 native int CS_WeaponIDToAlias(CSWeaponID weaponID, char[] destination, int len);
 
 /**
- * Returns weather a WeaponID is valid on the current mod (css or csgo)
- * @param weaponID		WeaponID to check
- * @return				Returns true if its a valid WeaponID false otherwise.
+ * Zwraca czy CSWeaponID jest prawidłowy dla aktualnie uruchomionej modyfikacji (CSS lub CS:GO).
+ * @param weaponID		CSWeaponID broni.
+ * @return				Zwraca true jeśli jest prawidłowy, w przeciwnym wypadku false.
  *
- * @note This will return false always for CSWeapon_NONE
+ * @note Zawsze zwraca false dla CSWeapon_NONE
  */
 native bool CS_IsValidWeaponID(CSWeaponID id);
 
 /**
- * Sets a player's model based on their current class
+ * Ustawia model gracza na podstawie aktualnej klasy gracza.
  *
- * @param client		Player's index.
- * @error			Invalid client index, client not in game.
+ * @param client		ID klienta.
+ * @error			Nieprawidłowe ID klienta, klient nie jest w grze.
  */
 native void CS_UpdateClientModel(int client);
 
 /**
  * Do not edit below this line!
  */
-public Extension __ext_cstrike = 
+public Extension __ext_cstrike =
 {
 	name = "cstrike",
 	file = "games/game.cstrike.ext",
