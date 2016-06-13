@@ -35,7 +35,7 @@
 #endif
 #define _lang_included
 
-#define LANG_SERVER		0		/**< Wykorzystuj translacje zgodne z językiem serwera */
+#define LANG_SERVER		0		/**< Wykorzystuj translacje zgodnie z językiem serwera */
 
 /**
  * Ładuje translacje dla pluginu wykorzystującego ten natyw.
